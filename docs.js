@@ -38,7 +38,7 @@ const DOCUMENTS = [
     title: "制作したページ",
     date: "2026-11-27",
     description: "",
-    accordion: false,
+    accordion: true,
     content: `
       <h1>ハムサ難易度表</h1>
       <p>BMSの難易度表。身内で好きな曲をまとめた難易度表。ゴミ譜面はhmsubに隔離している。</p>
