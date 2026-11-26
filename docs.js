@@ -30,7 +30,7 @@ const DOCUMENTS = [
     content: `
       <p>どれほど利用するか、どう利用するかは不明</p>
       <p>テストのためYouTubeのリンクを埋め込み</p>
-      <iframe src="https://www.youtube.com/watch?v=0NQz5jDulSU" height="480"></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/0NQz5jDulSU?si=8VFao_t5W4Oue0Kn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     `,
     tags: ["日記", "音ゲー"]
   },
