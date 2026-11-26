@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+JP:wght@400;600;700&display=swap');
 
 :root {
   --bg: #ffffff;
@@ -13,9 +13,9 @@
   --tag-text: #4b5563;
   --tag-active-bg: #1f2328;
   --tag-active-text: #ffffff;
-  --font-main: "Space Grotesk", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN",
+  --font-main: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "IBM Plex Sans JP",
     "Yu Gothic", YuGothic, sans-serif;
-  --font-code: "IBM Plex Mono", "BIZ UDPGothic", monospace;
+  --font-code: "IBM Plex Mono", "Hiragino Sans", "IBM Plex Sans JP", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
