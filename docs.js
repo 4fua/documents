@@ -28,11 +28,11 @@ const DOCUMENTS = [
     description: "",
     accordion: true,
     content: `
-      <p>どれほど利用するかは不明</p>
-      <p>テストのためボルテのベ枠を添付</p>
-      <img src="images/20261127-1.png" alt="PCのダウンロードフォルダにあったため">
+      <p>どれほど利用するか、どう利用するかは不明</p>
+      <p>テストのためYouTubeのリンクを埋め込み</p>
+      <iframe src="https://www.youtube.com/watch?v=0NQz5jDulSU" height="480"></iframe>
     `,
-    tags: ["メモ", "音ゲー"]
+    tags: ["日記", "音ゲー"]
   },
   {
     title: "まとめ：制作したページ",
@@ -48,6 +48,19 @@ const DOCUMENTS = [
       <p>バージョン時系列ごとに自分がいつまで全白だったのか知りたかったので制作。</p>
       <p>しかし楽曲の抜け漏れがあることが発覚したため、修正しようとして、してない。</p>
       <a href="https://4fua.github.io/iidx_versiontable/">リンク</a>
+    `,
+    tags: ["音ゲー", "制作物", "まとめ"]
+  },
+  {
+    title: "まとめ：制作した記事・動画等",
+    date: "2026-11-27",
+    description: "",
+    accordion: true,
+    content: `
+      <p>最終更新:2026/11/27</p>
+      <h1></h1>
+      <p>あとでかく。</p>
+      <a href="https://4fua.github.io/github.io/table_miuchi.html">リンク</a>
     `,
     tags: ["音ゲー", "制作物", "まとめ"]
   }
