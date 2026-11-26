@@ -24,7 +24,7 @@ const DOCUMENTS = [
     title: "ページを作成しました",
     date: "2026-11-27",
     description: "",
-    accordion: false,
+    accordion: true,
     content: `
       <p>どれほど利用するかは不明</p>
       <p>テストのためボルテのベ枠を添付</p>
