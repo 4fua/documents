@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ものおき日記</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Lenis CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css" />
 </head>
 <body>
+  <!-- Glassmorphismの透け感を際立たせる背景装飾 -->
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
   <div class="container">
     <header class="site-header">
       <h1>ものおき日記</h1>
@@ -23,18 +29,54 @@
     </div>
   </div>
 
+  <!-- ページ最上部へ戻るボタン -->
+  <button type="button" id="back-to-top" class="back-to-top" aria-label="ページの最上部へ戻る" title="最上部へ戻る">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
+  <!-- Lenis JS -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="docs.js"></script>
   <script>
+    // --- Lenis 慣性スクロール初期化 ---
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // --- ページ最上部へ戻るボタン制御 ---
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    lenis.on("scroll", ({ scroll }) => {
+      if (scroll > 240) {
+        backToTopBtn.classList.add("is-visible");
+      } else {
+        backToTopBtn.classList.remove("is-visible");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      lenis.scrollTo(0, { duration: 1.2 });
+    });
+
+    // --- 既存のレンダリング処理 ---
     const listEl = document.getElementById("doc-list");
     const tagBarEl = document.getElementById("tag-bar");
     const archiveEl = document.getElementById("archive-sidebar");
 
-    // docs.js の下にある（新しい）データほど上に表示されるよう逆順にする
     const items = Array.isArray(DOCUMENTS) ? [...DOCUMENTS].reverse() : [];
     let selectedTag = "ALL";
     let selectedMonth = "ALL";
 
-    // 日付文字列 ("2026-11-27" や "2026/11/27" 等) から "YYYY-MM" を抽出
     function extractYearMonth(dateStr) {
       if (typeof dateStr !== "string") return null;
       const m = dateStr.trim().match(/^(\d{4})[-/](\d{1,2})/);
@@ -42,18 +84,15 @@
       return `${m[1]}-${m[2].padStart(2, "0")}`;
     }
 
-    // "2026-11" -> "2026年11月"
     function formatYearMonthLabel(ym) {
       const [y, m] = ym.split("-");
       return `${y}年${parseInt(m, 10)}月`;
     }
 
-    // 全アイテムから重複なしでタグ一覧を抽出
     const allTags = Array.from(
       new Set(items.flatMap((doc) => (Array.isArray(doc.tags) ? doc.tags : [])))
     );
 
-    // 投稿時期ごとの件数を集計（新しい年月順）
     const monthCountMap = new Map();
     items.forEach((doc) => {
       const ym = extractYearMonth(doc.date);
@@ -163,7 +202,6 @@
           typeof doc.content === "string" && doc.content.trim() !== "";
 
         if (hasUrl) {
-          // 外部リンク項目
           li.innerHTML = `
             <a class="doc-link" href="${doc.url}" target="_blank" rel="noopener noreferrer">
               <div class="doc-head">
@@ -175,7 +213,6 @@
             </a>
           `;
         } else if (doc.accordion) {
-          // アコーディオン形式（クリックで本文を開閉）
           const openAttr = doc.open ? " open" : "";
           li.innerHTML = `
             <details class="doc-accordion"${openAttr}>
@@ -194,7 +231,6 @@
             </details>
           `;
         } else {
-          // 直接展開表示
           li.innerHTML = `
             <article class="doc-post">
               <div class="doc-head">

@@ -1,15 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
 
 :root {
-  --bg: #ffffff;
-  --card-bg: #ffffff;
+  --bg: #f2f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-hover: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-outline: rgba(31, 35, 40, 0.12);
+  --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  --orb-1: rgba(56, 189, 248, 0.22);
+  --orb-2: rgba(129, 140, 248, 0.2);
+
   --text: #1f2328;
-  --muted: #656d76;
-  --border: #d0d7de;
-  --subtle-border: #e5e9ee;
+  --muted: #57606a;
+  --border: rgba(31, 35, 40, 0.14);
+  --subtle-border: rgba(31, 35, 40, 0.08);
   --accent: #0969da;
-  --code-bg: #f6f8fa;
-  --tag-bg: #f3f4f6;
+  --code-bg: rgba(246, 248, 250, 0.75);
+  --tag-bg: rgba(255, 255, 255, 0.55);
   --tag-text: #4b5563;
   --tag-active-bg: #1f2328;
   --tag-active-text: #ffffff;
@@ -20,15 +27,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0d1117;
-    --card-bg: #12171f;
+    --bg: #090d14;
+    --glass-bg: rgba(20, 26, 36, 0.58);
+    --glass-bg-hover: rgba(28, 36, 50, 0.76);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-outline: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    --orb-1: rgba(56, 189, 248, 0.16);
+    --orb-2: rgba(139, 92, 246, 0.16);
+
     --text: #e6edf3;
     --muted: #8b949e;
-    --border: #30363d;
-    --subtle-border: #21262d;
+    --border: rgba(255, 255, 255, 0.12);
+    --subtle-border: rgba(255, 255, 255, 0.07);
     --accent: #58a6ff;
-    --code-bg: #161b22;
-    --tag-bg: #161b22;
+    --code-bg: rgba(13, 17, 23, 0.7);
+    --tag-bg: rgba(255, 255, 255, 0.05);
     --tag-text: #9ca3af;
     --tag-active-bg: #e6edf3;
     --tag-active-text: #0d1117;
@@ -44,19 +58,52 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.75;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 背景の淡い光彩（Glassmorphismの透過感を強調） */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-orb-1 {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: -100px;
+  background: var(--orb-1);
+}
+
+.bg-orb-2 {
+  width: 520px;
+  height: 520px;
+  bottom: -140px;
+  right: -100px;
+  background: var(--orb-2);
 }
 
 .container {
   max-width: 920px;
   margin: 0 auto;
-  padding: 36px 20px;
+  padding: 36px 20px 80px;
 }
 
 /* ページタイトル（上部に配置） */
 .site-header {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 14px;
-  margin-bottom: 18px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-shadow);
+  padding: 18px 22px;
+  margin-bottom: 20px;
 }
 
 .site-header h1 {
@@ -87,6 +134,8 @@ body {
 .sidebar-col {
   width: 200px;
   flex-shrink: 0;
+  position: sticky;
+  top: 24px;
 }
 
 .sidebar-col:empty {
@@ -100,14 +149,19 @@ body {
 
   .sidebar-col {
     width: 100%;
+    position: static;
   }
 }
 
 /* 右サイドバー：投稿時期アーカイブ */
 .archive-box {
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-shadow);
   border-radius: 0;
-  background: var(--card-bg);
   padding: 14px 16px;
 }
 
@@ -144,6 +198,11 @@ body {
   border-radius: 0;
   cursor: pointer;
   text-align: left;
+  transition: background 0.18s ease;
+}
+
+.archive-btn:hover:not(.active) {
+  background: rgba(128, 128, 128, 0.08);
 }
 
 .archive-btn.active {
@@ -175,15 +234,24 @@ body {
 
 .tag-filter-btn {
   appearance: none;
-  border: 1px solid var(--border);
-  background: var(--tag-bg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
   color: var(--tag-text);
   font-size: 0.8rem;
   font-weight: 500;
   font-family: inherit;
-  padding: 3px 11px;
+  padding: 4px 12px;
   border-radius: 0;
   cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.tag-filter-btn:hover:not(.active) {
+  background: var(--glass-bg-hover);
+  color: var(--text);
 }
 
 .tag-filter-btn.active {
@@ -193,20 +261,29 @@ body {
   font-weight: 700;
 }
 
-/* 記事リスト（1記事ごとのシンプルな直角枠囲み） */
+/* 記事リスト（Glassmorphism直角カード） */
 .doc-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .doc-item {
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-shadow);
   border-radius: 0;
-  background: var(--card-bg);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.doc-item:hover {
+  background: var(--glass-bg-hover);
 }
 
 /* 外部リンク形式 */
@@ -256,6 +333,7 @@ body {
   justify-content: center;
   color: var(--muted);
   font-size: 0.8rem;
+  transition: transform 0.2s ease;
 }
 
 .accordion-icon::before {
@@ -304,7 +382,6 @@ body {
   margin-top: 12px;
 }
 
-/* 本文内に書く見出し（h1〜h3）の階層サイズ */
 .doc-content h1 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -422,4 +499,57 @@ body {
   padding: 24px 4px;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+/* ページ最上部へ戻るボタン（Glassmorphism） */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-shadow);
+  color: var(--text);
+  border-radius: 0;
+  cursor: pointer;
+
+  /* 初期状態は非表示 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease, background 0.2s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+}
+
+.back-to-top:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 720px) {
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 40px;
+    height: 40px;
+  }
 }
