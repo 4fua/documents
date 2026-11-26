@@ -7,28 +7,62 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="container">
+  <div class="container">
     <header class="site-header">
       <h1>ものおき日記</h1>
       <p class="site-intro">ゴミの音ゲーマーのものおき、兼、日記。X:@m4fua</p>
     </header>
 
-    <div id="tag-bar" class="tag-bar"></div>
+    <div class="layout-grid">
+      <main class="main-col">
+        <div id="tag-bar" class="tag-bar"></div>
+        <ul id="doc-list" class="doc-list"></ul>
+      </main>
 
-    <ul id="doc-list" class="doc-list"></ul>
-  </main>
+      <aside id="archive-sidebar" class="sidebar-col" aria-label="投稿時期アーカイブ"></aside>
+    </div>
+  </div>
 
   <script src="docs.js"></script>
   <script>
     const listEl = document.getElementById("doc-list");
     const tagBarEl = document.getElementById("tag-bar");
+    const archiveEl = document.getElementById("archive-sidebar");
+
     // docs.js の下にある（新しい）データほど上に表示されるよう逆順にする
     const items = Array.isArray(DOCUMENTS) ? [...DOCUMENTS].reverse() : [];
     let selectedTag = "ALL";
+    let selectedMonth = "ALL";
+
+    // 日付文字列 ("2026-11-27" や "2026/11/27" 等) から "YYYY-MM" を抽出
+    function extractYearMonth(dateStr) {
+      if (typeof dateStr !== "string") return null;
+      const m = dateStr.trim().match(/^(\d{4})[-/](\d{1,2})/);
+      if (!m) return null;
+      return `${m[1]}-${m[2].padStart(2, "0")}`;
+    }
+
+    // "2026-11" -> "2026年11月"
+    function formatYearMonthLabel(ym) {
+      const [y, m] = ym.split("-");
+      return `${y}年${parseInt(m, 10)}月`;
+    }
 
     // 全アイテムから重複なしでタグ一覧を抽出
     const allTags = Array.from(
       new Set(items.flatMap((doc) => (Array.isArray(doc.tags) ? doc.tags : [])))
+    );
+
+    // 投稿時期ごとの件数を集計（新しい年月順）
+    const monthCountMap = new Map();
+    items.forEach((doc) => {
+      const ym = extractYearMonth(doc.date);
+      if (ym) {
+        monthCountMap.set(ym, (monthCountMap.get(ym) || 0) + 1);
+      }
+    });
+    const allMonths = Array.from(monthCountMap.keys()).sort((a, b) =>
+      b.localeCompare(a)
     );
 
     function renderTagBar() {
@@ -55,13 +89,56 @@
       });
     }
 
+    function renderArchiveSidebar() {
+      if (allMonths.length === 0) {
+        archiveEl.innerHTML = "";
+        return;
+      }
+
+      const monthItemsHtml = [
+        `<li>
+          <button type="button" class="archive-btn ${selectedMonth === "ALL" ? "active" : ""}" data-month="ALL">
+            <span>すべての時期</span>
+            <span class="archive-count">${items.length}</span>
+          </button>
+        </li>`,
+        ...allMonths.map((ym) => {
+          const activeClass = selectedMonth === ym ? "active" : "";
+          return `<li>
+            <button type="button" class="archive-btn ${activeClass}" data-month="${ym}">
+              <span>${formatYearMonthLabel(ym)}</span>
+              <span class="archive-count">${monthCountMap.get(ym)}</span>
+            </button>
+          </li>`;
+        }),
+      ].join("");
+
+      archiveEl.innerHTML = `
+        <div class="archive-box">
+          <div class="archive-heading">アーカイブ</div>
+          <ul class="archive-list">${monthItemsHtml}</ul>
+        </div>
+      `;
+
+      archiveEl.querySelectorAll(".archive-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedMonth = btn.dataset.month;
+          renderArchiveSidebar();
+          renderList();
+        });
+      });
+    }
+
     function renderList() {
-      const filtered =
-        selectedTag === "ALL"
-          ? items
-          : items.filter(
-              (doc) => Array.isArray(doc.tags) && doc.tags.includes(selectedTag)
-            );
+      const filtered = items.filter((doc) => {
+        const matchTag =
+          selectedTag === "ALL" ||
+          (Array.isArray(doc.tags) && doc.tags.includes(selectedTag));
+        const matchMonth =
+          selectedMonth === "ALL" ||
+          extractYearMonth(doc.date) === selectedMonth;
+        return matchTag && matchMonth;
+      });
 
       if (filtered.length === 0) {
         listEl.innerHTML =
@@ -136,6 +213,7 @@
     }
 
     renderTagBar();
+    renderArchiveSidebar();
     renderList();
   </script>
 </body>
