@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ものおき</title>
+  <title>作成した文書を公開するページ</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="container">
     <header class="site-header">
-      <h1>ものおき</h1>
-      <p class="site-intro">ゴミの音ゲーマーのものおき。X:@m4fua</p>
+      <h1>作成した文書を公開するページ</h1>
+      <p class="site-intro">ゴミの音ゲーマーでもできることがある。X:@m4fua</p>
     </header>
 
     <div id="tag-bar" class="tag-bar"></div>
@@ -22,7 +22,8 @@
   <script>
     const listEl = document.getElementById("doc-list");
     const tagBarEl = document.getElementById("tag-bar");
-    const items = Array.isArray(DOCUMENTS) ? DOCUMENTS : [];
+    // docs.js の下にある（新しい）データほど上に表示されるよう逆順にする
+    const items = Array.isArray(DOCUMENTS) ? [...DOCUMENTS].reverse() : [];
     let selectedTag = "ALL";
 
     // 全アイテムから重複なしでタグ一覧を抽出
