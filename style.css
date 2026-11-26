@@ -47,7 +47,7 @@ body {
   padding: 36px 20px;
 }
 
-/* ページタイトル（上部に配置・v10の大きさに復元） */
+/* ページタイトル（上部に配置） */
 .site-header {
   border-bottom: 1px solid var(--border);
   padding-bottom: 14px;
@@ -56,7 +56,7 @@ body {
 
 .site-header h1 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -297,29 +297,26 @@ body {
   margin-top: 12px;
 }
 
-/* 本文内に書く見出し（h1〜h4）を記事見出し（1.15rem）より小さく調整 */
+/* 本文内に書く見出し（h1〜h3）の階層サイズ */
 .doc-content h1 {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin: 1em 0 0.4em;
+  line-height: 1.4;
+  margin: 1.1em 0 0.45em;
 }
 
 .doc-content h2 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin: 0.9em 0 0.4em;
+  line-height: 1.45;
+  margin: 1em 0 0.4em;
 }
 
 .doc-content h3 {
-  font-size: 0.96rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin: 0.8em 0 0.35em;
-}
-
-.doc-content h4 {
-  font-size: 0.94rem;
-  font-weight: 600;
-  margin: 0.8em 0 0.35em;
+  line-height: 1.5;
+  margin: 0.9em 0 0.35em;
 }
 
 .doc-content p {
