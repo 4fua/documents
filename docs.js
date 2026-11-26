@@ -5,12 +5,14 @@ const DOCUMENTS = [
     date: "2026-11-27",
     url: "https://drive.google.com/file/d/...",
     description: "簡単な説明文",
+    accordion: true,
     tags: ["文書", "音ゲー"]
   },
   {
     title: "直接掲載のサンプル",
     date: "2026-11-27",
     description: "省略可",
+    accordion: true,
     content: `
       <p>ここに文章を直接書けます。改行もそのまま書けます。</p>
       <img src="images/sample.png" alt="画像の説明">
@@ -31,5 +33,20 @@ const DOCUMENTS = [
       <img src="images/20261127-1.png" alt="PCのダウンロードフォルダにあったため">
     `,
     tags: ["メモ", "音ゲー"]
+  },
+  {
+    title: "制作したページ",
+    date: "2026-11-27",
+    description: "",
+    accordion: false,
+    content: `
+      <h1>ハムサ難易度表</h1>
+      <p>BMSの難易度表。身内で好きな曲をまとめた難易度表。ゴミ譜面はhmsubに隔離している。</p>
+      <a href="https://4fua.github.io/github.io/table_miuchi.html">リンク</a>
+      <h1>IIDX☆12バージョン全白支援ツール(?)</h1>
+      <p>バージョン時系列毎にいつまで全白だったのか知りたかったので制作。しかし楽曲の抜け漏れがあることが発覚したため修正しようとして、してない。</p>
+      <a href="https://4fua.github.io/iidx_versiontable/">リンク</a>
+    `,
+    tags: ["音ゲー", "制作物"]
   }
 ];
