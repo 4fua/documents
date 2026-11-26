@@ -43,11 +43,11 @@ const DOCUMENTS = [
 
       <p>最終更新:2026/11/27 譜面を除く</p>
 
-      <h1>ハムサ難易度表</h1>
+      <h2>ハムサ難易度表</h2>
       <p>BMSの難易度表。身内で好きな曲をまとめた難易度表。癖譜面はhmsubに隔離している。</p>
       <a href="https://4fua.github.io/github.io/table_miuchi.html">リンク</a>
 
-      <h1>IIDX☆12バージョン全白支援ツール(?)</h1>
+      <h2>IIDX☆12バージョン全白支援ツール(?)</h2>
       <p>バージョン時系列ごとに自分がいつまで全白だったのか知りたかったので制作。</p>
       <p>しかし楽曲の抜け漏れがあることが発覚したため、修正しようとして、してない。</p>
       <a href="https://4fua.github.io/iidx_versiontable/">リンク</a>
@@ -63,19 +63,21 @@ const DOCUMENTS = [
     content: `
 
       <p>最終更新:2026/11/27</p>
+      
+      <h1>BMS</h1>
 
-      <h1>村 [廃村] / カラフル・サウンズ・ポート obj:fua</h1>
-      <p>集0 こういう譜面あったらおもろいやろなあ、みたいなノリで作った譜面。そんそん</p>
-      <a href="https://mocha-repository.info/songs/165147">mochaIR</a>
+        <h2>村 [廃村] / カラフル・サウンズ・ポート obj:fua</h2>
+        <p>集0 こういう譜面あったらおもろいやろなあ、みたいなノリで作った譜面。そんそん</p>
+        <a href="https://mocha-repository.info/songs/165147">mochaIR</a>
 
-      <h1>飛翔するG [fu] / HALLPBE.S obj:fua</h1>
-      <p>✡18 集0 衛11 曲が好きだったので制作。Solomon難易度表に収録され目玉が飛び出た</p>
-      <a href="https://mocha-repository.info/songs/166218">mochaIR</a>
+        <h2>飛翔するG [fu] / HALLPBE.S obj:fua</h2>
+        <p>✡18 集0 衛11 曲が好きだったので制作。Solomon難易度表に収録され目玉が飛び出た</p>
+        <a href="https://mocha-repository.info/songs/166218">mochaIR</a>
 
-      <h1>A Summer That Never Was / Music:Connexio BGA:AiLANE obj: fua</h1>
-      <p>INSANE, ANOTHER, HYPER譜面(同梱)を制作。BOF:22のチームメンバーとして制作させていただきました</p>
-      <a href="https://mocha-repository.info/songs/171857">mochaIR</a>
-      <a href="https://manbow.nothing.sh/event/event.cgi?action=More_def&num=250&event=152">BOF:22</a>
+        <h2>A Summer That Never Was / Music:Connexio BGA:AiLANE obj: fua</h2>
+        <p>INSANE, ANOTHER, HYPER譜面(同梱)を制作。BOF:22のチームメンバーとして制作させていただきました</p>
+        <a href="https://mocha-repository.info/songs/171857">mochaIR</a>
+        <a href="https://manbow.nothing.sh/event/event.cgi?action=More_def&num=250&event=152">BOF:22</a>
 
     `,
     tags: ["音ゲー", "制作物", "譜面", "まとめ"]
