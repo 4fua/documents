@@ -35,11 +35,12 @@ const DOCUMENTS = [
     tags: ["メモ", "音ゲー"]
   },
   {
-    title: "制作したページ",
+    title: "まとめ：制作したページ",
     date: "2026-11-27",
     description: "",
     accordion: true,
     content: `
+      <p>最終更新:2026/11/27</p>
       <h1>ハムサ難易度表</h1>
       <p>BMSの難易度表。身内で好きな曲をまとめた難易度表。ゴミ譜面はhmsubに隔離している。</p>
       <a href="https://4fua.github.io/github.io/table_miuchi.html">リンク</a>
@@ -48,6 +49,6 @@ const DOCUMENTS = [
       <p>しかし楽曲の抜け漏れがあることが発覚したため、修正しようとして、してない。</p>
       <a href="https://4fua.github.io/iidx_versiontable/">リンク</a>
     `,
-    tags: ["音ゲー", "制作物"]
+    tags: ["音ゲー", "制作物", "まとめ"]
   }
 ];
