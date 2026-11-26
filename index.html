@@ -94,8 +94,25 @@
               ${tagsHtml}
             </a>
           `;
+        } else if (doc.accordion) {
+          // アコーディオン形式（クリックで本文を開閉）
+          const openAttr = doc.open ? " open" : "";
+          li.innerHTML = `
+            <details class="doc-accordion"${openAttr}>
+              <summary class="doc-summary">
+                <div class="doc-summary-body">
+                  ${doc.date ? `<span class="doc-date">${doc.date}</span>` : ""}
+                  <span class="doc-title">${doc.title || ""}</span>
+                  ${doc.description ? `<p class="doc-desc">${doc.description}</p>` : ""}
+                  ${tagsHtml}
+                </div>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </summary>
+              ${hasContent ? `<div class="doc-content">${doc.content}</div>` : ""}
+            </details>
+          `;
         } else {
-          // 直接掲載項目（文章・画像・埋め込みオブジェクト等）
+          // 直接展開表示（従来通りそのまま表示）
           li.innerHTML = `
             <article class="doc-post">
               ${doc.date ? `<span class="doc-date">${doc.date}</span>` : ""}
