@@ -44,7 +44,7 @@ const DOCUMENTS = [
       <p>最終更新:2026/11/27 譜面を除く</p>
 
       <h1>ハムサ難易度表</h1>
-      <p>BMSの難易度表。身内で好きな曲をまとめた難易度表。ゴミ譜面はhmsubに隔離している。</p>
+      <p>BMSの難易度表。身内で好きな曲をまとめた難易度表。癖譜面はhmsubに隔離している。</p>
       <a href="https://4fua.github.io/github.io/table_miuchi.html">リンク</a>
 
       <h1>IIDX☆12バージョン全白支援ツール(?)</h1>
