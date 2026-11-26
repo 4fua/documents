@@ -47,6 +47,26 @@ body {
   padding: 36px 20px;
 }
 
+/* ページタイトル（上部に配置・控えめなサイズ） */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.site-intro {
+  margin: 4px 0 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
 /* タグ絞り込みバー */
 .tag-bar {
   display: flex;
@@ -151,7 +171,7 @@ body {
   transform: rotate(180deg);
 }
 
-/* 記事ヘッダー（日付＋タイトル＋タイトル下の軽い区切り線） */
+/* 記事見出し（日付＋記事見出し＋下の軽い区切り線） */
 .doc-head {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--subtle-border);
@@ -167,8 +187,8 @@ body {
 .doc-title {
   display: block;
   margin: 2px 0 0;
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   line-height: 1.45;
 }
 
@@ -187,6 +207,31 @@ body {
 
 .doc-accordion .doc-content {
   margin-top: 12px;
+}
+
+/* 本文内に書く見出し（h1〜h4）を記事見出し（1.15rem）より小さく調整 */
+.doc-content h1 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 1em 0 0.4em;
+}
+
+.doc-content h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.9em 0 0.4em;
+}
+
+.doc-content h3 {
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin: 0.8em 0 0.35em;
+}
+
+.doc-content h4 {
+  font-size: 0.94rem;
+  font-weight: 600;
+  margin: 0.8em 0 0.35em;
 }
 
 .doc-content p {
@@ -281,24 +326,4 @@ body {
   padding: 24px 4px;
   color: var(--muted);
   font-size: 0.92rem;
-}
-
-/* サイト情報（記事一覧の下に配置・控えめなサイズ） */
-.site-header {
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
-  margin-top: 28px;
-}
-
-.site-header h1 {
-  margin: 0;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--muted);
-}
-
-.site-intro {
-  margin: 4px 0 0;
-  font-size: 0.84rem;
-  color: var(--muted);
 }
