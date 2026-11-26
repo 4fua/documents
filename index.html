@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>作成したものを公開するページ</title>
+  <title>作成した文書を公開するページ</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="container">
     <header class="site-header">
-      <h1>作成したものを公開するページ</h1>
+      <h1>作成した文書を公開するページ</h1>
       <p class="site-intro">ゴミの音ゲーマーでもできることがある。X:@m4fua</p>
     </header>
 
@@ -72,6 +72,7 @@
       filtered.forEach((doc) => {
         const li = document.createElement("li");
         li.className = "doc-item";
+
         const tagsHtml =
           Array.isArray(doc.tags) && doc.tags.length > 0
             ? `<div class="doc-tags">${doc.tags
@@ -79,14 +80,33 @@
                 .join("")}</div>`
             : "";
 
-        li.innerHTML = `
-          <a href="${doc.url}" target="_blank" rel="noopener noreferrer">
-            <span class="doc-date">${doc.date || ""}</span>
-            <span class="doc-title">${doc.title}</span>
-            ${doc.description ? `<p class="doc-desc">${doc.description}</p>` : ""}
-            ${tagsHtml}
-          </a>
-        `;
+        const hasUrl = typeof doc.url === "string" && doc.url.trim() !== "";
+        const hasContent =
+          typeof doc.content === "string" && doc.content.trim() !== "";
+
+        if (hasUrl) {
+          // 外部リンク項目（従来通り）
+          li.innerHTML = `
+            <a class="doc-link" href="${doc.url}" target="_blank" rel="noopener noreferrer">
+              <span class="doc-date">${doc.date || ""}</span>
+              <span class="doc-title">${doc.title || ""}</span>
+              ${doc.description ? `<p class="doc-desc">${doc.description}</p>` : ""}
+              ${tagsHtml}
+            </a>
+          `;
+        } else {
+          // 直接掲載項目（文章・画像・埋め込みオブジェクト等）
+          li.innerHTML = `
+            <article class="doc-post">
+              ${doc.date ? `<span class="doc-date">${doc.date}</span>` : ""}
+              ${doc.title ? `<h2 class="doc-title">${doc.title}</h2>` : ""}
+              ${doc.description ? `<p class="doc-desc">${doc.description}</p>` : ""}
+              ${hasContent ? `<div class="doc-content">${doc.content}</div>` : ""}
+              ${tagsHtml}
+            </article>
+          `;
+        }
+
         listEl.appendChild(li);
       });
     }
