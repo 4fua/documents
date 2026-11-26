@@ -1,8 +1,10 @@
 :root {
   --bg: #ffffff;
+  --card-bg: #ffffff;
   --text: #1f2328;
   --muted: #656d76;
   --border: #d0d7de;
+  --subtle-border: #e5e9ee;
   --accent: #0969da;
   --code-bg: #f6f8fa;
   --tag-bg: #f3f4f6;
@@ -14,9 +16,11 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0d1117;
+    --card-bg: #12171f;
     --text: #e6edf3;
     --muted: #8b949e;
     --border: #30363d;
+    --subtle-border: #21262d;
     --accent: #58a6ff;
     --code-bg: #161b22;
     --tag-bg: #161b22;
@@ -40,23 +44,25 @@ body {
 .container {
   max-width: 680px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 36px 20px;
 }
 
 .site-header {
   border-bottom: 1px solid var(--border);
-  padding-bottom: 18px;
+  padding-bottom: 14px;
   margin-bottom: 16px;
 }
 
 .site-header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .site-intro {
-  margin: 8px 0 0;
-  font-size: 0.94rem;
+  margin: 6px 0 0;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
@@ -65,7 +71,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .tag-bar:empty {
@@ -77,9 +83,9 @@ body {
   border: 1px solid var(--border);
   background: var(--tag-bg);
   color: var(--tag-text);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-family: inherit;
-  padding: 4px 11px;
+  padding: 3px 11px;
   border-radius: 999px;
   cursor: pointer;
   transition: opacity 0.15s;
@@ -96,20 +102,31 @@ body {
   font-weight: 600;
 }
 
+/* 記事リスト（1記事ごとのシンプルな枠囲み） */
 .doc-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .doc-item {
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  transition: border-color 0.15s;
+}
+
+.doc-item:hover {
+  border-color: var(--muted);
 }
 
 /* 外部リンク形式 */
 .doc-link {
   display: block;
-  padding: 16px 4px;
+  padding: 16px 18px;
   text-decoration: none;
   color: inherit;
 }
@@ -121,12 +138,12 @@ body {
 
 /* 直接掲載形式（常時展開） */
 .doc-post {
-  padding: 18px 4px;
+  padding: 16px 18px;
 }
 
 /* アコーディオン形式（開閉式） */
 .doc-accordion {
-  padding: 16px 4px;
+  padding: 16px 18px;
 }
 
 .doc-summary {
@@ -154,14 +171,14 @@ body {
 
 .accordion-icon {
   flex-shrink: 0;
-  margin-top: 4px;
+  margin-top: 2px;
   width: 20px;
   height: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   transition: transform 0.2s ease;
 }
 
@@ -173,36 +190,42 @@ body {
   transform: rotate(180deg);
 }
 
-.doc-accordion .doc-content {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--border);
+/* 記事ヘッダー（日付＋タイトル＋タイトル下の軽い区切り線） */
+.doc-head {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--subtle-border);
 }
 
 .doc-date {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--muted);
+  line-height: 1.4;
 }
 
 .doc-title {
   display: block;
-  margin: 0;
-  font-size: 1.08rem;
+  margin: 2px 0 0;
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.45;
 }
 
 .doc-desc {
-  margin: 5px 0 0;
-  font-size: 0.9rem;
+  margin: 8px 0 0;
+  font-size: 0.88rem;
   color: var(--muted);
 }
 
 /* 直接掲載の本文・画像・埋め込みオブジェクト */
 .doc-content {
   margin-top: 10px;
-  font-size: 0.96rem;
+  font-size: 0.94rem;
   word-break: break-word;
+}
+
+.doc-accordion .doc-content {
+  margin-top: 12px;
 }
 
 .doc-content p {
@@ -254,14 +277,14 @@ body {
   padding: 12px 14px;
   border-radius: 6px;
   overflow-x: auto;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 }
 
 .doc-content code {
   background: var(--code-bg);
   padding: 2px 5px;
   border-radius: 4px;
-  font-size: 0.88em;
+  font-size: 0.86em;
 }
 
 .doc-content pre code {
@@ -285,7 +308,7 @@ body {
 }
 
 .doc-tag {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   color: var(--tag-text);
   background: var(--tag-bg);
   border: 1px solid var(--border);
@@ -296,5 +319,5 @@ body {
 .empty {
   padding: 24px 4px;
   color: var(--muted);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
 }
